@@ -27,7 +27,6 @@ install -Dm0755 sensor-simulator %{buildroot}%{_bindir}/sensor-simulator
 install -Dm0755 telemetry-receiver %{buildroot}%{_bindir}/telemetry-receiver
 install -Dm0755 telemetry-distributor %{buildroot}%{_bindir}/telemetry-distributor
 install -Dm0644 fpecs.desktop %{buildroot}%{_datadir}/applications/fpecs.desktop
-%{_datadir}/icons/hicolor/scalable/apps/fpecs.svg
 install -Dm0644 fpecs.svg %{buildroot}%{_datadir}/icons/hicolor/scalable/apps/fpecs.svg
 install -Dm0755 fpecs-db-setup %{buildroot}%{_bindir}/fpecs-db-setup
 install -Dm0644 migrations/001_initial_schema.sql %{buildroot}%{_datadir}/fpecs/migrations/001_initial_schema.sql
