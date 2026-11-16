@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# Optional database schema provisioner shipped with the FPECS RPM.
+# Needs an already-running PostgreSQL server and a PostgreSQL administrator role.
+# Never creates demo users, astronauts, passwords, or telemetry.
+set -euo pipefail
+DB_NAME="${FPECS_DB_NAME:-lunar_hms}"
+SCHEMA_DIR="${FPECS_SCHEMA_DIR:-/usr/share/fpecs/migrations}"
+if [[ "${1:-}" == '--help' ]]; then
+  printf '%s\n' 'Usage: FPECS_DB_NAME=lunar_hms fpecs-db-setup [--dry-run]' \
+    'Set PGHOST, PGPORT, PGUSER (and optionally PGPASSWORD or ~/.pgpass) for PostgreSQL admin access.' \
+    'This script only creates the database (if absent) and applies the schema.'
+  exit 0
+fi
+[[ "${1:-}" == '' || "${1:-}" == '--dry-run' ]] || { echo 'Only --dry-run is supported' >&2; exit 1; }
+[[ "$DB_NAME" =~ ^[a-z_][a-z0-9_]*$ ]] || { echo 'Invalid FPECS_DB_NAME' >&2; exit 1; }
+[[ -r "$SCHEMA_DIR/001_initial_schema.sql" && -r "$SCHEMA_DIR/002_runtime_snapshot.sql" ]] || { echo "Missing SQL migration files in $SCHEMA_DIR" >&2; exit 1; }
+if [[ "${1:-}" == '--dry-run' ]]; then
+  echo "[FPECS] DRY RUN: would prepare PostgreSQL database $DB_NAME, without seed accounts."
+  exit 0
+fi
+command -v psql >/dev/null || { echo '[FPECS] Install the PostgreSQL client (psql)' >&2; exit 1; }
+command -v createdb >/dev/null || { echo '[FPECS] Install the PostgreSQL client (createdb)' >&2; exit 1; }
+exists="$(psql -X -v ON_ERROR_STOP=1 -d postgres -Atqc "SELECT 1 FROM pg_database WHERE datname='$DB_NAME'")"
+if [[ "$exists" != '1' ]]; then
+  createdb "$DB_NAME"
+fi
+psql -X -v ON_ERROR_STOP=1 -d "$DB_NAME" -f "$SCHEMA_DIR/001_initial_schema.sql"
+psql -X -v ON_ERROR_STOP=1 -d "$DB_NAME" -f "$SCHEMA_DIR/002_runtime_snapshot.sql"
+echo "[FPECS] Prepared $DB_NAME. Grant the application DB role only the required privileges, then configure via FPECS Settings."

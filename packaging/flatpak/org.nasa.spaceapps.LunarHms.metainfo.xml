@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.nasa.spaceapps.LunarHms</id>
+  <name>ASTRA-MED Lunar Crew Health Monitoring System</name>
+  <summary>Autonomous physiological, habitat, radiation, and EVA spacesuit telemetry suite for lunar missions</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <description>
+    <p>Developed for the NASA International Space Apps Challenge 2026, ASTRA-MED is a modular microservice system written in Rust for continuous monitoring of astronaut health, lunar habitat environment, radiation exposure, and EVA spacesuit telemetry.</p>
+  </description>
+</component>

@@ -1,0 +1,63 @@
+name: ASTRA-MED Lunar HMS CI & Multi-Platform Release
+
+on:
+  push:
+    branches: [ "main" ]
+    tags: [ "v*" ]
+  pull_request:
+    branches: [ "main" ]
+
+env:
+  CARGO_TERM_COLOR: always
+  LUNAR_HMAC_SECRET: "CI_TEST_HMAC_SECRET_KEY_2026"
+
+jobs:
+  fmt-clippy-test:
+    name: Format, Clippy & Unit/Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+      - name: Install Linux GUI system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev libdbus-1-dev pkg-config
+      - name: Run non-destructive FPECS Rust checks
+        run: ./scripts/03_build_and_test.sh
+
+  build-windows-linux:
+    name: Build Release Binaries (${{ matrix.os }})
+    needs: fmt-clippy-test
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: ${{ matrix.target }}
+      - name: Install Linux dependencies
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev libdbus-1-dev pkg-config
+      - name: Build native Linux binaries and optional RPM
+        if: matrix.os == 'ubuntu-latest'
+        run: ./scripts/04_build_release.sh
+      - name: Build native Windows EXEs and optional Inno Setup installer
+        if: matrix.os == 'windows-latest'
+        shell: pwsh
+        run: ./scripts/04_build_release.ps1
+      - name: Upload compiled build output (when job succeeds)
+        uses: actions/upload-artifact@v4
+        with:
+          name: fpecs-${{ matrix.target }}
+          path: dist/
+          if-no-files-found: error

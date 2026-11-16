@@ -1,0 +1,56 @@
+# Rust build products
+/target/
+/dist/
+**/*.rs.bk
+*.rpm
+*.exe
+*.msi
+*.flatpak
+
+# Local runtime data, user profiles, telemetry and backups
+/data/
+/logs/
+**/state.json
+**/state.json.*
+**/fpecs_state.json
+**/database.json
+**/database.json.*
+*.sqlite
+*.sqlite3
+*.sqlite3-*
+*.db
+*.db-*
+*.dump
+*.backup
+*.log
+*.tmp
+*.bak
+
+# Secrets, connection details and private certificates
+.env
+.env.*
+!.env.example
+**/.pgpass
+**/pgpass.conf
+*.key
+*.pem
+*.p12
+*.pfx
+*.jks
+*.secret
+*.secrets
+*credentials*.json
+*secrets*.json
+/config/certs/
+
+# Developer and OS caches
+.git/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+__pycache__/
+.pytest_cache/
+.flatpak-builder/
+build-dir/
+/repo/

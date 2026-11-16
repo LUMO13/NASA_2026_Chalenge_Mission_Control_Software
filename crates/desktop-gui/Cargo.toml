@@ -1,0 +1,32 @@
+[package]
+name = "desktop-gui"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+shared-core = { path = "../shared-core" }
+sensor-simulator = { path = "../sensor-simulator" }
+telemetry-receiver = { path = "../telemetry-receiver" }
+telemetry-distributor = { path = "../telemetry-distributor" }
+database = { path = "../database" }
+health-analyzer = { path = "../health-analyzer" }
+access-control = { path = "../access-control" }
+data-stream-manager = { path = "../data-stream-manager" }
+eframe.workspace = true
+egui.workspace = true
+egui_plot.workspace = true
+egui_extras.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
+
+sqlx.workspace = true
+tokio.workspace = true
+
+# Encrypted OS credential store: Secret Service on Linux, Credential Manager on Windows.
+keyring = { version = "3.6.3", default-features = false, features = ["sync-secret-service", "crypto-rust", "windows-native"] }

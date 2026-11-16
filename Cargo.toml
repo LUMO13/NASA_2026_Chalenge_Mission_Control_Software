@@ -1,0 +1,49 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/shared-core",
+    "crates/sensor-simulator",
+    "crates/telemetry-receiver",
+    "crates/telemetry-distributor",
+    "crates/database",
+    "crates/health-analyzer",
+    "crates/access-control",
+    "crates/data-stream-manager",
+    "crates/desktop-gui",
+]
+
+[workspace.package]
+version = "1.0.0"
+edition = "2021"
+authors = ["NASA Space Apps 2026 — Lunar Crew Health Monitoring Team"]
+license = "MIT"
+repository = "https://github.com/lunar-hms-2026/lunar-hms"
+
+[workspace.dependencies]
+tokio = { version = "1.38", features = ["full"] }
+axum = { version = "0.7", features = ["ws", "macros", "json"] }
+tower = { version = "0.4", features = ["util", "limit"] }
+tower-http = { version = "0.5", features = ["cors", "trace", "limit"] }
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "sqlite", "chrono", "uuid", "json"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+uuid = { version = "1.8", features = ["v4", "serde"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+thiserror = "1.0"
+anyhow = "1.0"
+argon2 = "0.5"
+rand = "0.8"
+hmac = "0.12"
+sha2 = "0.10"
+hex = "0.4"
+jsonwebtoken = "9.3"
+flate2 = "1.0"
+reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls"] }
+eframe = { version = "0.28", default-features = false, features = ["default_fonts", "glow", "persistence"] }
+egui = "0.28"
+egui_plot = "0.28"
+egui_extras = { version = "0.28", features = ["all_loaders"] }
+async-trait = "0.1"

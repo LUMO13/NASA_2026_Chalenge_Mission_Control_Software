@@ -1,0 +1,55 @@
+# Конфігурація системи моніторингу здоров'я космонавтів Lunar HMS (NASA Space Apps 2026)
+# УВАГА: Паролі та криптографічні секрети НЕ зберігаються у цьому файлі — вони передаються через змінні середовища:
+# LUNAR_DB_PASSWORD, LUNAR_JWT_SECRET, LUNAR_HMAC_SECRET, LUNAR_ADMIN_INITIAL_PASSWORD
+
+[general]
+mission_name = "Artemis-IV Lunar Base Alpha"
+environment = "demonstration"
+default_timezone_offset_hours = 2 # Наприклад, UTC+2 (Дніпро / Київ) для відображення в GUI; у БД все зберігається в UTC
+
+[network]
+simulator_bind_addr = "127.0.0.1:7001"
+receiver_bind_addr = "127.0.0.1:7002"
+distributor_bind_addr = "127.0.0.1:7003"
+analyzer_bind_addr = "127.0.0.1:7004"
+access_control_bind_addr = "127.0.0.1:7005"
+stream_manager_bind_addr = "127.0.0.1:7006"
+earth_uplink_endpoint = "https://127.0.0.1:8443/api/v1/earth-uplink"
+tls_enabled = true
+tls_cert_path = "config/certs/server.crt"
+tls_key_path = "config/certs/server.key"
+
+[database]
+postgres_host = "127.0.0.1"
+postgres_port = 5432
+postgres_user = "lunar_hms_app"
+postgres_db = "lunar_hms"
+sqlite_fallback_path = "data/local_offline_buffer.sqlite3"
+max_connections = 20
+connection_timeout_secs = 5
+
+[simulator]
+default_poll_interval_ms = 1000
+default_error_margin_pct = 1.5
+ecg_sample_rate_hz = 250
+simulate_packet_loss_pct = 0.0
+
+[distributor]
+accumulation_window_secs = 30
+batch_max_records = 100
+retry_max_attempts = 5
+retry_base_backoff_ms = 1000
+offline_mode_default = false
+
+[lifecycle]
+hot_retention_days = 7
+warm_archive_days = 30
+max_earth_packet_bytes = 524288
+require_verified_sync_before_purge = true
+
+[security]
+session_ttl_minutes = 60
+max_failed_login_attempts = 5
+account_lockout_minutes = 15
+rate_limit_requests_per_minute = 120
+anti_replay_window_secs = 60

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=FPECS (Prototype)
+Comment=Simulated astronaut health-monitoring dashboard
+Exec=desktop-gui
+Icon=fpecs
+Terminal=false
+Categories=Science;Education;

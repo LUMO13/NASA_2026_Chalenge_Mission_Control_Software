@@ -1,0 +1,21 @@
+[package]
+name = "data-stream-manager"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+
+[dependencies]
+shared-core = { path = "../shared-core" }
+access-control = { path = "../access-control" }
+database = { path = "../database" }
+tokio.workspace = true
+axum.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+chrono.workspace = true
+uuid.workspace = true
+tracing.workspace = true
+
+[dev-dependencies]
+sensor-simulator = { path = "../sensor-simulator" }

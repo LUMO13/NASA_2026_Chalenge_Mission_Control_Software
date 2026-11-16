@@ -1,0 +1,147 @@
+# Конфігуровані пороги демонстраційного прототипу Lunar HMS
+# ВАЖЛИВО: Ці значення призначені для демонстраційного моделювання в межах NASA Space Apps Challenge 2026
+# і не є сертифікованими клінічними медичними нормами. Користувач із роллю Flight Surgeon або Administrator
+# може змінювати їх у реальному часі.
+
+[biomedical.heart_rate_bpm]
+unit = "bpm"
+sensor_type = "Optical PPG + 3-Lead Chest ECG Patch"
+sampling_rate_hz = 1.0
+info_low = 55.0
+info_high = 105.0
+warning_low = 48.0
+warning_high = 135.0
+critical_low = 40.0
+critical_high = 165.0
+
+[biomedical.systolic_bp_mmhg]
+unit = "mmHg"
+sensor_type = "Oscillometric Cuffless Optical Pulse Transit Time Sensor"
+sampling_rate_hz = 0.033
+info_low = 100.0
+info_high = 130.0
+warning_low = 90.0
+warning_high = 145.0
+critical_low = 80.0
+critical_high = 170.0
+
+[biomedical.diastolic_bp_mmhg]
+unit = "mmHg"
+sensor_type = "Oscillometric Cuffless Optical Pulse Transit Time Sensor"
+sampling_rate_hz = 0.033
+info_low = 65.0
+info_high = 85.0
+warning_low = 55.0
+warning_high = 95.0
+critical_low = 45.0
+critical_high = 110.0
+
+[biomedical.respiration_rate_cpm]
+unit = "cycles/min"
+sensor_type = "Thoracic Bio-Impedance Pneumography Belt"
+sampling_rate_hz = 1.0
+info_low = 11.0
+info_high = 20.0
+warning_low = 9.0
+warning_high = 26.0
+critical_low = 6.0
+critical_high = 34.0
+
+[biomedical.spo2_pct]
+unit = "%"
+sensor_type = "Dual-Wavelength Transflectance Pulse Oximeter (660nm/940nm)"
+sampling_rate_hz = 1.0
+info_low = 95.0
+info_high = 100.0
+warning_low = 91.0
+warning_high = 100.0
+critical_low = 86.0
+critical_high = 100.0
+
+[biomedical.core_temp_c]
+unit = "°C"
+sensor_type = "Ingestible Telemetry Pill / Tympanic IR Thermistor"
+sampling_rate_hz = 0.2
+info_low = 36.2
+info_high = 37.4
+warning_low = 35.5
+warning_high = 38.2
+critical_low = 34.8
+critical_high = 39.2
+
+[biomedical.glucose_mmol_l]
+unit = "mmol/L"
+sensor_type = "Subcutaneous Continuous Interstitial Glucose Monitor (CGM)"
+sampling_rate_hz = 0.0033
+info_low = 4.0
+info_high = 7.2
+warning_low = 3.5
+warning_high = 9.5
+critical_low = 2.8
+critical_high = 13.0
+
+[biomedical.lactate_mmol_l]
+unit = "mmol/L"
+sensor_type = "Electrochemical Sweat/Interstitial Biosensor Patch"
+sampling_rate_hz = 0.016
+info_low = 0.5
+info_high = 2.2
+warning_low = 0.3
+warning_high = 4.0
+critical_low = 0.1
+critical_high = 6.5
+
+[habitat.pressure_kpa]
+unit = "kPa"
+sensor_type = "MEMS Piezoresistive Barometric Transducer"
+sampling_rate_hz = 0.5
+info_low = 98.0
+info_high = 103.0
+warning_low = 92.0
+warning_high = 106.0
+critical_low = 82.0
+critical_high = 112.0
+
+[habitat.o2_pct]
+unit = "% vol"
+sensor_type = "Zirconia / Electrochemical Galvanic O2 Cell"
+sampling_rate_hz = 0.5
+info_low = 20.2
+info_high = 21.8
+warning_low = 19.2
+warning_high = 23.0
+critical_low = 17.5
+critical_high = 24.5
+
+[habitat.co2_ppm]
+unit = "ppm"
+sensor_type = "NDIR (Non-Dispersive Infrared) Gas Analyzer"
+sampling_rate_hz = 0.5
+info_low = 350.0
+info_high = 1200.0
+warning_low = 250.0
+warning_high = 3500.0
+critical_low = 150.0
+critical_high = 5500.0
+
+[radiation.dose_rate_usv_h]
+unit = "µSv/h"
+sensor_type = "Silicon PIN Diode + Tissue-Equivalent Proportional Counter (TEPC)"
+sampling_rate_hz = 0.2
+info_low = 0.0
+info_high = 35.0
+warning_low = 0.0
+warning_high = 120.0
+critical_low = 0.0
+critical_high = 500.0
+
+[suits.internal_pressure_kpa]
+unit = "kPa"
+sensor_type = "Redundant Dual-Channel EVA Suit Pressure Transducer"
+sampling_rate_hz = 2.0
+info_low = 28.5
+info_high = 31.5
+warning_low = 26.0
+warning_high = 34.0
+critical_low = 22.0
+critical_high = 38.0

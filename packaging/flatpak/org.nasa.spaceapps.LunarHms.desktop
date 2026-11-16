@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=ASTRA-MED Lunar Crew Health Monitor
+Comment=Autonomous Astronaut Health & Habitat Telemetry System (NASA Space Apps 2026)
+Exec=desktop-gui
+Icon=org.nasa.spaceapps.LunarHms
+Terminal=false
+Type=Application
+Categories=Science;MedicalSoftware;Monitor;
+StartupNotify=true

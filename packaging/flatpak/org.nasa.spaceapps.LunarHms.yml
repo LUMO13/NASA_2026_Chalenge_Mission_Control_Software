@@ -1,0 +1,32 @@
+app-id: org.nasa.spaceapps.LunarHms
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
+command: desktop-gui
+finish-args:
+  - --share=ipc
+  - --socket=fallback-x11
+  - --socket=wayland
+  - --device=dri
+  - --share=network
+  - --filesystem=xdg-data/lunar-hms:create
+build-options:
+  append-path: /usr/lib/sdk/rust-stable/bin
+  env:
+    CARGO_HOME: /run/build/lunar-hms/cargo
+modules:
+  - name: lunar-hms
+    buildsystem: simple
+    build-commands:
+      - cargo --offline build --release --workspace
+      - install -Dm755 target/release/desktop-gui /app/bin/desktop-gui
+      - install -Dm755 target/release/sensor-simulator /app/bin/sensor-simulator
+      - install -Dm755 target/release/telemetry-receiver /app/bin/telemetry-receiver
+      - install -Dm755 target/release/telemetry-distributor /app/bin/telemetry-distributor
+      - install -Dm644 packaging/flatpak/org.nasa.spaceapps.LunarHms.desktop /app/share/applications/org.nasa.spaceapps.LunarHms.desktop
+      - install -Dm644 packaging/flatpak/org.nasa.spaceapps.LunarHms.metainfo.xml /app/share/metainfo/org.nasa.spaceapps.LunarHms.metainfo.xml
+    sources:
+      - type: dir
+        path: ../..
